@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
-
+# Model สำหรับสูตรเครื่องดื่ม
+from django.db import models
+from django.contrib.auth.models import User
 class Member(models.Model):
     username = models.OneToOneField(User, on_delete=models.CASCADE)
     first_name = models.CharField(max_length=100)
@@ -19,9 +21,7 @@ class DrinkCategory(models.Model):
     def __str__(self):
         return self.name
 
-# Model สำหรับสูตรเครื่องดื่ม
-from django.db import models
-from django.contrib.auth.models import User
+
 
 class DrinkRecipe(models.Model):
     name = models.CharField(max_length=200)  # ชื่อสูตร
