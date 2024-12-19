@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 flex items-center justify-center min-h-screen">
+    <div class="bg-white shadow-lg rounded-lg p-8 max-w-md w-full">
+        <h1 class="text-2xl font-bold text-gray-800 text-center mb-6">Sign Up</h1>
+        
+        <!-- ฟอร์มสำหรับ Sign Up -->
+        <form method="POST">
+            {% csrf_token %}
+            
+            <!-- แสดงข้อความ Error หากฟอร์มมีปัญหา -->
+            {% if form.errors %}
+            <div class="bg-red-100 text-red-600 p-4 rounded-lg mb-4">
+                <ul>
+                    {% for field, errors in form.errors.items %}
+                        <li><strong>{{ field }}:</strong> {{ errors|join:", " }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+            
+            <!-- ฟิลด์ Username -->
+            <div class="mb-4">
+                <label for="username" class="block text-gray-700 font-medium mb-2">Username</label>
+                <input type="text" name="username" id="username" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Choose a username">
+            </div>
+            
+            <!-- ฟิลด์ Email -->
+            <div class="mb-4">
+                <label for="email" class="block text-gray-700 font-medium mb-2">Email</label>
+                <input type="email" name="email" id="email" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Enter your email">
+            </div>
+            
+            <!-- ฟิลด์ Password -->
+            <div class="mb-4">
+                <label for="password1" class="block text-gray-700 font-medium mb-2">Password</label>
+                <input type="password" name="password1" id="password1" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Create a password">
+            </div>
+            
+            <!-- ฟิลด์ Confirm Password -->
+            <div class="mb-6">
+                <label for="password2" class="block text-gray-700 font-medium mb-2">Confirm Password</label>
+                <input type="password" name="password2" id="password2" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Confirm your password">
+            </div>
+            
+            <!-- ปุ่ม Sign Up -->
+            <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 font-semibold">
+                Sign Up
+            </button>
+        </form>
+        
+        <!-- ลิงก์ไปหน้า Login -->
+        <p class="text-center text-gray-600 mt-4">
+            Already have an account? <a href="/login/" class="text-blue-500 hover:underline">Login</a>
+        </p>
+    </div>
+</body>
+</html>

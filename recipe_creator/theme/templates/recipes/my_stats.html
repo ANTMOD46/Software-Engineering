@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>สถิติของฉัน</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    {% include 'recipes/header.html' %}
+    <div class="max-w-7xl mx-auto py-10 px-4">
+        <h1 class="text-3xl font-bold text-blue-500 mb-6">สถิติของฉัน</h1>
+        <div class="bg-white shadow rounded-lg p-6">
+            <!-- ข้อมูลแบบข้อความ -->
+            <p class="text-lg mb-4">สูตรที่คุณสร้างทั้งหมด: <strong>{{ total_recipes }}</strong></p>
+            <h2 class="text-xl font-bold text-gray-800 mb-4">จำนวนสูตรแยกตามประเภท</h2>
+            
+            <!-- กราฟแสดงจำนวนสูตร -->
+            <canvas id="categoryChart" class="w-full max-w-lg mx-auto"></canvas>
+        </div>
+    </div>
+
+    <script>
+        // รับข้อมูลจาก Django
+        const categories = {{ categories|safe }};  // รายชื่อประเภท
+        const counts = {{ counts|safe }};          // จำนวนในแต่ละประเภท
+
+        // ตั้งค่า Chart.js
+        const ctx = document.getElementById('categoryChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'pie', // เปลี่ยนเป็น 'bar' หากต้องการแสดงกราฟแท่ง
+            data: {
+                labels: categories,
+                datasets: [{
+                    label: 'จำนวนสูตร',
+                    data: counts,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.6)',
+                        'rgba(54, 162, 235, 0.6)',
+                        'rgba(255, 206, 86, 0.6)',
+                        'rgba(75, 192, 192, 0.6)',
+                        'rgba(153, 102, 255, 0.6)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top'
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

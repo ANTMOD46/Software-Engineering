@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe Creator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <!-- Header -->
+    <nav class="bg-blue-500 shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <a href="{% url 'home_user' %}" class="text-white text-2xl font-bold">ผู้สร้างสูตรเครื่องดื่ม</a>
+                
+                <!-- Navigation Links -->
+                <div class="flex space-x-4">
+                    <a href="/recipes/" class="text-white hover:text-gray-200">ดูสูตรทั้งหมด</a>
+                    <a href="/recipes/add/" class="text-white hover:text-gray-200">เพิ่มสูตรใหม่</a>
+                    <a href="/recipes/search/" class="text-white hover:text-gray-200">ค้นหาสูตร</a>
+                    <a href="/stats/" class="text-white hover:text-gray-200">สถิติของฉัน</a>
+                </div>
+                
+                <!-- Logout Button -->
+                <div>
+                    {% if user.is_authenticated %}
+                        <form method="POST" action="{% url 'logout' %}">
+                            {% csrf_token %}
+                            <button type="submit" class="bg-red-500 text-white py-1 px-4 rounded hover:bg-red-600">
+                                ออกจากระบบ
+                            </button>
+                        </form>
+                    {% else %}
+                        <a href="/login/" class="bg-green-500 text-white py-1 px-4 rounded hover:bg-green-600">เข้าสู่ระบบ</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </nav>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>รายละเอียดสูตร</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    {% include 'recipes/header.html' %}
+    <div class="max-w-4xl mx-auto py-10 px-4">
+        <h1 class="text-3xl font-bold text-blue-500 mb-6 text-center">{{ recipe.name }}</h1>
+        
+        <!-- แสดงภาพแบบเล็กลงและจัดให้อยู่ตรงกลาง -->
+        <div class="flex justify-center">
+            <img src="{{ recipe.image.url }}" alt="{{ recipe.name }}" class="max-w-md w-full h-auto rounded-lg mb-6">
+        </div>
+
+        <!-- รายละเอียดสูตร -->
+        <div class="bg-white shadow rounded-lg p-6">
+            <p class="mb-4"><strong>ประเภท:</strong> {{ recipe.category }}</p>
+            <p class="mb-4"><strong>ส่วนผสม:</strong> {{ recipe.ingredients }}</p>
+            <p><strong>ขั้นตอน:</strong> {{ recipe.steps }}</p>
+        </div>
+        
+        <!-- ลิงก์กลับไปหน้าหลัก -->
+        <div class="text-center mt-6">
+            <a href="{% url 'view_recipes' %}" class="text-blue-500 hover:underline">กลับไปยังหน้าหลัก</a>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>แก้ไขสูตร</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    {% include 'recipes/header.html' %}
+    <div class="max-w-7xl mx-auto py-10 px-4">
+        <h1 class="text-3xl font-bold text-yellow-500 mb-6">แก้ไขสูตร</h1>
+        <form method="POST" enctype="multipart/form-data" class="space-y-4 bg-white p-6 shadow rounded-lg">
+            {% csrf_token %}
+            <!-- ชื่อสูตร -->
+            <div>
+                <label class="block text-gray-700 font-semibold">ชื่อสูตร</label>
+                <input type="text" name="name" value="{{ recipe.name }}" class="w-full border rounded-lg p-2">
+            </div>
+
+            <!-- ประเภท -->
+            <div>
+                <label class="block text-gray-700 font-semibold">ประเภท</label>
+                <select name="category" class="w-full border rounded-lg p-2">
+                    <option value="ม็อกเทล" {% if recipe.category == "ม็อกเทล" %}selected{% endif %}>ม็อกเทล</option>
+                    <option value="สมูทตี้" {% if recipe.category == "สมูทตี้" %}selected{% endif %}>สมูทตี้</option>
+                    <option value="น้ำผลไม้" {% if recipe.category == "น้ำผลไม้" %}selected{% endif %}>น้ำผลไม้</option>
+                    <option value="ค็อกเทล" {% if recipe.category == "ค็อกเทล" %}selected{% endif %}>ค็อกเทล</option>
+                </select>
+            </div>
+
+            <!-- ส่วนผสม -->
+            <div>
+                <label class="block text-gray-700 font-semibold">ส่วนผสม</label>
+                <textarea name="ingredients" class="w-full border rounded-lg p-2">{{ recipe.ingredients }}</textarea>
+            </div>
+
+            <!-- ขั้นตอน -->
+            <div>
+                <label class="block text-gray-700 font-semibold">ขั้นตอน</label>
+                <textarea name="steps" class="w-full border rounded-lg p-2">{{ recipe.steps }}</textarea>
+            </div>
+
+            <!-- รูปภาพ -->
+            <div>
+                <label class="block text-gray-700 font-semibold">รูปภาพ</label>
+                <input type="file" name="image" class="w-full border rounded-lg p-2">
+            </div>
+
+            <!-- ปุ่มบันทึก -->
+            <button type="submit" class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600">บันทึก</button>
+        </form>
+    </div>
+</body>
+</html>
